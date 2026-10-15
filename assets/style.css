@@ -1,0 +1,359 @@
+/* ============================================================
+   NutriVoice — custom styling (Dark Navy Theme)
+   Palette: dark navy background, white text, NutriVoice green
+   accents. Input fields stay light for readability/contrast.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --nv-bg: #0F2A47;            /* main page background: dark navy */
+    --nv-panel: #17395C;         /* cards / sections: slightly lighter navy */
+    --nv-panel-alt: #1E4A73;     /* nested panels (e.g. hero) */
+    --nv-green: #2E9F6B;         /* accent: buttons, highlights, section labels */
+    --nv-green-hover: #268a5c;
+    --nv-text: #FFFFFF;          /* primary text on dark surfaces */
+    --nv-text-secondary: #C7D6E5;/* secondary text on dark surfaces */
+    --nv-text-muted: #93A9C0;    /* captions / helper text on dark surfaces */
+    --nv-border: #2F5878;        /* borders/dividers on dark surfaces */
+    --nv-focus: #2E9F6B;
+    --nv-warning-bg: #4A3B12;
+    --nv-warning-text: #FCD34D;
+    /* Inputs stay light for contrast/readability against the dark page */
+    --nv-input-bg: #FFFFFF;
+    --nv-input-text: #12355B;
+    --nv-input-border: #CBD5E1;
+}
+
+/* ---------- Global: dark navy surfaces, white text everywhere ---------- */
+html, body, .stApp {
+    background-color: var(--nv-bg) !important;
+    color: var(--nv-text);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+.stApp, .main, .block-container {
+    background-color: var(--nv-bg) !important;
+}
+
+/* Hide default Streamlit chrome for a cleaner look */
+#MainMenu, footer {visibility: hidden;}
+
+/* Generic text color hardening — covers markdown paragraphs, captions,
+   labels and any element Streamlit renders with a theme-dependent color.
+   Scoped to text-bearing tags only, so icons/backgrounds are untouched. */
+.stApp p,
+.stApp span,
+.stApp label,
+.stApp div[data-testid="stMarkdownContainer"],
+.stApp h1, .stApp h2, .stApp h3, .stApp h4, .stApp h5, .stApp h6 {
+    color: var(--nv-text);
+}
+
+.stApp h1, .stApp h2, .stApp h3 {
+    font-weight: 700;
+}
+
+/* ---------- Streamlit widget labels ---------- */
+[data-testid="stWidgetLabel"],
+[data-testid="stWidgetLabel"] p,
+[data-testid="stWidgetLabel"] label,
+[data-testid="stWidgetLabel"] div {
+    color: var(--nv-text) !important;
+    font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    opacity: 1 !important;
+}
+
+/* ---------- Text / number inputs — kept light for max readability ---------- */
+[data-testid="stTextInput"] input,
+[data-testid="stNumberInput"] input,
+[data-testid="stTextArea"] textarea {
+    background-color: var(--nv-input-bg) !important;
+    color: var(--nv-input-text) !important;
+    border: 1px solid var(--nv-input-border) !important;
+    border-radius: 8px !important;
+    padding: 0.55rem 0.75rem !important;
+    font-size: 0.95rem !important;
+}
+[data-testid="stTextInput"] input::placeholder,
+[data-testid="stTextArea"] textarea::placeholder {
+    color: #64748B !important;
+    opacity: 1 !important;
+}
+[data-testid="stTextInput"] input:focus,
+[data-testid="stNumberInput"] input:focus,
+[data-testid="stTextArea"] textarea:focus {
+    border: 1.5px solid var(--nv-focus) !important;
+    box-shadow: 0 0 0 2px rgba(46, 159, 107, 0.25) !important;
+    outline: none !important;
+}
+[data-testid="stNumberInput"] button {
+    background-color: var(--nv-input-bg) !important;
+    color: var(--nv-input-text) !important;
+    border: 1px solid var(--nv-input-border) !important;
+}
+
+/* ---------- Selectbox / dropdown (BaseWeb) — also kept light ---------- */
+[data-baseweb="select"] > div {
+    background-color: var(--nv-input-bg) !important;
+    border: 1px solid var(--nv-input-border) !important;
+    border-radius: 8px !important;
+    color: var(--nv-input-text) !important;
+}
+[data-baseweb="select"] span,
+[data-baseweb="select"] div {
+    color: var(--nv-input-text) !important;
+}
+[data-baseweb="select"]:focus-within > div {
+    border: 1.5px solid var(--nv-focus) !important;
+    box-shadow: 0 0 0 2px rgba(46, 159, 107, 0.25) !important;
+}
+/* Dropdown popover menu (renders in a portal, needs its own rule) */
+[data-baseweb="popover"] li,
+[data-baseweb="menu"] li,
+ul[role="listbox"] li {
+    background-color: #FFFFFF !important;
+    color: var(--nv-input-text) !important;
+}
+[data-baseweb="popover"] li:hover,
+[data-baseweb="menu"] li:hover,
+ul[role="listbox"] li:hover {
+    background-color: #EAF3EE !important;
+    color: var(--nv-input-text) !important;
+}
+
+/* ---------- Radio buttons ---------- */
+[data-testid="stRadio"] label p,
+[data-testid="stRadio"] label span,
+[data-testid="stRadio"] div[role="radiogroup"] label {
+    color: var(--nv-text) !important;
+    font-weight: 500;
+}
+
+/* ---------- Captions / helper text ---------- */
+[data-testid="stCaptionContainer"],
+.stApp small {
+    color: var(--nv-text-muted) !important;
+    font-size: 0.82rem !important;
+}
+
+/* ---------- Header ---------- */
+.nv-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0 1rem 0;
+    border-bottom: 1px solid var(--nv-border);
+    margin-bottom: 1.5rem;
+}
+.nv-logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--nv-text);
+    letter-spacing: -0.5px;
+}
+.nv-tagline {
+    font-size: 0.85rem;
+    color: var(--nv-text-secondary);
+    margin-top: -6px;
+}
+
+/* ---------- Hero section ---------- */
+.nv-hero {
+    background-color: var(--nv-panel-alt);
+    border-radius: 16px;
+    padding: 3rem 2.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--nv-border);
+}
+.nv-hero h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: var(--nv-text) !important;
+    margin-bottom: 0.6rem;
+    line-height: 1.25;
+}
+.nv-hero h1 .nv-highlight {
+    color: var(--nv-green) !important;
+}
+.nv-hero p {
+    font-size: 1.05rem;
+    color: var(--nv-text-secondary) !important;
+    max-width: 640px;
+    margin-bottom: 1.4rem;
+}
+
+/* ---------- Cards ---------- */
+.nv-card {
+    background-color: var(--nv-panel);
+    border: 1px solid var(--nv-border);
+    border-radius: 14px;
+    padding: 1.4rem 1.3rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    height: 100%;
+}
+.nv-card h3 {
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+    color: var(--nv-text) !important;
+    font-weight: 700;
+}
+.nv-card p {
+    color: var(--nv-text-secondary) !important;
+    font-size: 0.92rem;
+    margin: 0;
+}
+
+/* ---------- Section labels ---------- */
+.nv-section-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--nv-green) !important;
+    margin: 1.1rem 0 0.5rem 0;
+    border-bottom: 2px solid var(--nv-border);
+    padding-bottom: 0.35rem;
+}
+
+/* ---------- Badges ---------- */
+.nv-badge {
+    display: inline-block;
+    background-color: var(--nv-warning-bg);
+    color: var(--nv-warning-text) !important;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 999px;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.3px;
+}
+.nv-badge-green {
+    background-color: rgba(46, 159, 107, 0.18);
+    color: #5FD8A3 !important;
+}
+
+/* ---------- Profile header ---------- */
+.nv-profile-header {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--nv-border);
+}
+.nv-avatar {
+    font-size: 2.2rem;
+    background-color: rgba(46, 159, 107, 0.18);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+.nv-profile-header h2 {
+    color: var(--nv-text) !important;
+    margin-bottom: 2px !important;
+}
+.nv-profile-header .nv-category {
+    color: var(--nv-green) !important;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+/* ---------- Profile rows ---------- */
+.nv-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 0.2rem;
+    border-bottom: 1px solid var(--nv-border);
+    font-size: 0.95rem;
+}
+.nv-row span:first-child {
+    color: var(--nv-text-secondary) !important;
+    font-weight: 600;
+}
+.nv-row span:last-child {
+    font-weight: 600;
+    color: var(--nv-text) !important;
+    font-size: 1rem;
+}
+
+/* ---------- Notices ---------- */
+.nv-notice {
+    background-color: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(96, 165, 250, 0.4);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+    color: var(--nv-text) !important;
+    margin: 0.8rem 0 1rem 0;
+}
+.nv-notice strong { color: var(--nv-text) !important; }
+
+/* ---------- Buttons ---------- */
+/* Default = secondary style: transparent/dark bg, white border/text */
+.stButton > button {
+    background-color: transparent !important;
+    color: var(--nv-text) !important;
+    border: 1.5px solid var(--nv-text) !important;
+    border-radius: 8px !important;
+    padding: 0.5rem 1.2rem !important;
+    font-weight: 600 !important;
+    transition: all 0.15s ease-in;
+}
+.stButton > button:hover {
+    border-color: var(--nv-green) !important;
+    color: var(--nv-green) !important;
+}
+.stButton > button p {
+    color: inherit !important;
+}
+
+/* Primary = green filled, used for main CTAs and the active nav item */
+.stButton > button[kind="primary"] {
+    background-color: var(--nv-green) !important;
+    color: #FFFFFF !important;
+    border: 1.5px solid var(--nv-green) !important;
+}
+.stButton > button[kind="primary"]:hover {
+    background-color: var(--nv-green-hover) !important;
+    border-color: var(--nv-green-hover) !important;
+    color: #FFFFFF !important;
+}
+.stButton > button[kind="primary"] p {
+    color: #FFFFFF !important;
+}
+
+/* ---------- Sidebar ---------- */
+section[data-testid="stSidebar"] {
+    background-color: var(--nv-panel) !important;
+    border-right: 1px solid var(--nv-border);
+}
+section[data-testid="stSidebar"] * {
+    color: var(--nv-text);
+}
+section[data-testid="stSidebar"] .stButton > button {
+    background-color: transparent !important;
+    color: var(--nv-text) !important;
+    border: 1px solid var(--nv-border) !important;
+    text-align: left !important;
+    justify-content: flex-start !important;
+}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"] {
+    background-color: var(--nv-green) !important;
+    border: 1px solid var(--nv-green) !important;
+    color: #FFFFFF !important;
+}
+section[data-testid="stSidebar"] .stButton > button[kind="primary"] p {
+    color: #FFFFFF !important;
+}
+
+/* Profile status text */
+.nv-status-ok { color: #5FD8A3 !important; font-weight: 600; }
+.nv-status-warn { color: #FCD34D !important; font-weight: 600; }
